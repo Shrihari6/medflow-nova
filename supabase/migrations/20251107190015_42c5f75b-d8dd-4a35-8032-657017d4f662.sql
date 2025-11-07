@@ -320,3 +320,48 @@ $$;
 CREATE TRIGGER on_auth_user_created
   AFTER INSERT ON auth.users
   FOR EACH ROW EXECUTE FUNCTION public.handle_new_user();
+
+
+
+
+
+INSERT INTO doctors (user_id, employee_id, email, phone, department, specialization, qualification, experience_years, rating, patient_count, schedule, availability) VALUES
+('00000000-0000-0000-0000-000000000001', 'DOC001', 'dr.smith@hospital.com', '+1-555-0101', 'Cardiology', 'Cardiac Surgery', 'MD, FACS', 15, 4.8, 45, '{\"monday\": \"9AM-5PM\", \"wednesday\": \"9AM-5PM\", \"friday\": \"9AM-5PM\"}', 'Available'),
+('00000000-0000-0000-0000-000000000002', 'DOC002', 'dr.johnson@hospital.com', '+1-555-0102', 'Neurology', 'Brain Surgery', 'MD, PhD', 12, 4.9, 38, '{\"tuesday\": \"10AM-6PM\", \"thursday\": \"10AM-6PM\"}', 'Available'),
+('00000000-0000-0000-0000-000000000003', 'DOC003', 'dr.williams@hospital.com', '+1-555-0103', 'Orthopedics', 'Joint Replacement', 'MD, FAAOS', 10, 4.7, 52, '{\"monday\": \"8AM-4PM\", \"wednesday\": \"8AM-4PM\", \"friday\": \"8AM-4PM\"}', 'Available'),
+('00000000-0000-0000-0000-000000000004', 'DOC004', 'dr.brown@hospital.com', '+1-555-0104', 'Pediatrics', 'Child Care', 'MD, FAAP', 8, 4.6, 65, '{\"monday\": \"9AM-5PM\", \"tuesday\": \"9AM-5PM\", \"thursday\": \"9AM-5PM\"}', 'On Leave'),
+('00000000-0000-0000-0000-000000000005', 'DOC005', 'dr.davis@hospital.com', '+1-555-0105', 'Emergency', 'Trauma Care', 'MD, FACEP', 20, 4.9, 120, '{\"everyday\": \"24/7 Rotation\"}', 'Available');
+
+-- Insert 5 staff
+INSERT INTO staff (user_id, employee_id, email, phone, department, role, shift, salary, joined_date) VALUES
+('00000000-0000-0000-0000-000000000011', 'STF001', 'sarah.nurse@hospital.com', '+1-555-0201', 'Cardiology', 'Senior Nurse', 'Morning', 65000, '2020-01-15'),
+('00000000-0000-0000-0000-000000000012', 'STF002', 'mike.tech@hospital.com', '+1-555-0202', 'Radiology', 'Lab Technician', 'Evening', 55000, '2021-03-20'),
+('00000000-0000-0000-0000-000000000013', 'STF003', 'emily.admin@hospital.com', '+1-555-0203', 'Administration', 'Receptionist', 'Morning', 45000, '2019-06-10'),
+('00000000-0000-0000-0000-000000000014', 'STF004', 'james.pharma@hospital.com', '+1-555-0204', 'Pharmacy', 'Pharmacist', 'Night', 70000, '2020-11-05'),
+('00000000-0000-0000-0000-000000000015', 'STF005', 'lisa.nurse@hospital.com', '+1-555-0205', 'Emergency', 'Nurse', 'Night', 62000, '2021-08-22');
+
+-- Insert 10 patients
+INSERT INTO patients (user_id, patient_id, full_name, age, gender, blood_type, phone, email, address, emergency_contact, emergency_phone, department, condition, status, assigned_doctor_id, room_id, medications, allergies, notes, admission_date) VALUES
+(NULL, 'PAT001', 'John Anderson', 45, 'Male', 'O+', '+1-555-1001', 'john.anderson@email.com', '123 Oak Street, Springfield, IL 62701', 'Mary Anderson', '+1-555-1002', 'Cardiology', 'Acute Myocardial Infarction', 'stable', '00000000-0000-0000-0000-000000000001', NULL, '[\"Aspirin 81mg\", \"Metoprolol 50mg\", \"Atorvastatin 40mg\"]', '[\"Penicillin\"]', 'Patient recovering well post-angioplasty', '2025-01-05'),
+(NULL, 'PAT002', 'Sarah Mitchell', 62, 'Female', 'A+', '+1-555-1003', 'sarah.mitchell@email.com', '456 Maple Ave, Chicago, IL 60601', 'Robert Mitchell', '+1-555-1004', 'Neurology', 'Ischemic Stroke', 'recovering', '00000000-0000-0000-0000-000000000002', NULL, '[\"Clopidogrel 75mg\", \"Lisinopril 10mg\"]', '[]', 'Speech therapy in progress', '2025-01-10'),
+(NULL, 'PAT003', 'Michael Chen', 38, 'Male', 'B+', '+1-555-1005', 'michael.chen@email.com', '789 Pine Road, Boston, MA 02101', 'Lisa Chen', '+1-555-1006', 'Orthopedics', 'Femur Fracture', 'stable', '00000000-0000-0000-0000-000000000003', NULL, '[\"Ibuprofen 600mg\", \"Calcium supplements\"]', '[]', 'Post-surgery day 5, healing well', '2025-01-08'),
+(NULL, 'PAT004', 'Emily Rodriguez', 8, 'Female', 'AB+', '+1-555-1007', 'parent.rodriguez@email.com', '321 Elm Street, Austin, TX 78701', 'Maria Rodriguez', '+1-555-1008', 'Pediatrics', 'Severe Pneumonia', 'critical', '00000000-0000-0000-0000-000000000004', NULL, '[\"Amoxicillin 500mg\", \"Albuterol inhaler\"]', '[\"Eggs\", \"Peanuts\"]', 'Requires close monitoring, oxygen support', '2025-01-12'),
+(NULL, 'PAT005', 'David Thompson', 55, 'Male', 'O-', '+1-555-1009', 'david.thompson@email.com', '654 Birch Lane, Seattle, WA 98101', 'Jennifer Thompson', '+1-555-1010', 'Emergency', 'Multi-trauma from MVA', 'critical', '00000000-0000-0000-0000-000000000005', NULL, '[\"Morphine\", \"Ceftriaxone 2g\"]', '[]', 'ICU admission, multiple fractures', '2025-01-15'),
+(NULL, 'PAT006', 'Lisa Park', 29, 'Female', 'A-', '+1-555-1011', 'lisa.park@email.com', '987 Cedar Court, Portland, OR 97201', 'James Park', '+1-555-1012', 'Cardiology', 'Atrial Fibrillation', 'stable', '00000000-0000-0000-0000-000000000001', NULL, '[\"Warfarin 5mg\", \"Metoprolol 25mg\"]', '[]', 'Awaiting cardioversion procedure', '2025-01-14'),
+(NULL, 'PAT007', 'Robert Williams', 71, 'Male', 'B-', '+1-555-1013', 'robert.williams@email.com', '147 Walnut Drive, Denver, CO 80201', 'Susan Williams', '+1-555-1014', 'Neurology', 'Parkinsons Disease', 'stable', '00000000-0000-0000-0000-000000000002', NULL, '[\"Carbidopa-Levodopa\", \"Pramipexole\"]', '[\"Sulfa drugs\"]', 'Long-term management, regular follow-ups', '2024-12-20'),
+(NULL, 'PAT008', 'Amanda Garcia', 42, 'Female', 'O+', '+1-555-1015', 'amanda.garcia@email.com', '258 Spruce Street, Miami, FL 33101', 'Carlos Garcia', '+1-555-1016', 'Orthopedics', 'Hip Replacement Surgery', 'recovering', '00000000-0000-0000-0000-000000000003', NULL, '[\"Enoxaparin\", \"Acetaminophen 1000mg\"]', '[]', 'Physical therapy started', '2025-01-11'),
+(NULL, 'PAT009', 'Christopher Lee', 5, 'Male', 'A+', '+1-555-1017', 'parent.lee@email.com', '369 Ash Avenue, Phoenix, AZ 85001', 'Grace Lee', '+1-555-1018', 'Pediatrics', 'Acute Appendicitis', 'recovering', '00000000-0000-0000-0000-000000000004', NULL, '[\"Cefazolin\", \"Acetaminophen syrup\"]', '[]', 'Post-appendectomy day 3', '2025-01-13'),
+(NULL, 'PAT010', 'Patricia Moore', 67, 'Female', 'AB-', '+1-555-1019', 'patricia.moore@email.com', '741 Poplar Place, Atlanta, GA 30301', 'Richard Moore', '+1-555-1020', 'Emergency', 'Septic Shock', 'critical', '00000000-0000-0000-0000-000000000005', NULL, '[\"Norepinephrine drip\", \"Meropenem 1g\", \"IV fluids\"]', '[\"Latex\"]', 'Critical care, vasopressor support', '2025-01-16');
+
+-- Insert bills for revenue tracking
+INSERT INTO bills (patient_id, bill_number, description, amount, status, date, paid_date) VALUES
+((SELECT id FROM patients WHERE patient_id = 'PAT001'), 'BILL-2025-001', 'Angioplasty procedure and 5-day admission', 45000, 'paid', '2025-01-10', '2025-01-11'),
+((SELECT id FROM patients WHERE patient_id = 'PAT002'), 'BILL-2025-002', 'Stroke treatment and rehabilitation', 38000, 'pending', '2025-01-15', NULL),
+((SELECT id FROM patients WHERE patient_id = 'PAT003'), 'BILL-2025-003', 'Femur surgery and physiotherapy', 28000, 'paid', '2025-01-13', '2025-01-14'),
+((SELECT id FROM patients WHERE patient_id = 'PAT004'), 'BILL-2025-004', 'Pediatric ICU care and medications', 15000, 'pending', '2025-01-16', NULL),
+((SELECT id FROM patients WHERE patient_id = 'PAT005'), 'BILL-2025-005', 'Emergency trauma care and surgery', 65000, 'overdue', '2025-01-16', NULL),
+((SELECT id FROM patients WHERE patient_id = 'PAT006'), 'BILL-2025-006', 'Cardiology consultation and tests', 8500, 'paid', '2025-01-15', '2025-01-16'),
+((SELECT id FROM patients WHERE patient_id = 'PAT007'), 'BILL-2025-007', 'Neurology follow-up and medications', 5200, 'paid', '2025-01-05', '2025-01-06'),
+((SELECT id FROM patients WHERE patient_id = 'PAT008'), 'BILL-2025-008', 'Hip replacement surgery', 52000, 'pending', '2025-01-16', NULL),
+((SELECT id FROM patients WHERE patient_id = 'PAT009'), 'BILL-2025-009', 'Appendectomy surgery', 12000, 'paid', '2025-01-16', '2025-01-16'),
+((SELECT id FROM patients WHERE patient_id = 'PAT010'), 'BILL-2025-010', 'Critical care and ICU', 48000, 'pending', '2025-01-17', NULL);
